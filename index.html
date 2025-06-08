@@ -64,25 +64,14 @@
 
     <div class="images">
       <label>Vater Vorschau:</label>
-      <img id="fatherPreview" src="img/default_male.png" alt="Vater Vorschau">
+      <img id="fatherPreview" src="img/0.png" alt="Vater Vorschau">
 
       <label>Mutter Vorschau:</label>
-      <img id="motherPreview" src="img/default_female.png" alt="Mutter Vorschau">
+      <img id="motherPreview" src="img/21.png" alt="Mutter Vorschau">
     </div>
   </div>
 
   <script>
-    const fathers = [
-      "Benjamin", "Daniel", "Joshua", "Noah", "Andrew", "Juan", "Alex", "Isaac",
-      "Evan", "Ethan", "Vincent", "Angel", "Diego", "Adrian", "Gabriel", "Michael",
-      "Santiago", "Kevin", "Louis", "Samuel", "Anthony"
-    ];
-    const mothers = [
-      "Hannah", "Audrey", "Jasmine", "Giselle", "Amelia", "Isabella", "Zoe", "Ava",
-      "Camila", "Violet", "Sophia", "Evelyn", "Nicole", "Ashley", "Grace", "Brianna",
-      "Natalie", "Olivia", "Elizabeth", "Charlotte", "Emma"
-    ];
-
     const fatherSelect = document.getElementById('fatherSelect');
     const motherSelect = document.getElementById('motherSelect');
     const faceIdOutput = document.getElementById('faceId');
@@ -90,31 +79,30 @@
     const fatherPreview = document.getElementById('fatherPreview');
     const motherPreview = document.getElementById('motherPreview');
 
-    fathers.forEach((name, index) => {
+    // IDs 0–20 für Väter (Gesicht)
+    for (let i = 0; i <= 20; i++) {
       const option = document.createElement('option');
-      option.value = index;
-      option.textContent = `${index} - ${name}`;
+      option.value = i;
+      option.textContent = `ID ${i}`;
       fatherSelect.appendChild(option);
-    });
+    }
 
-    mothers.forEach((name, index) => {
+    // IDs 21–42 für Mütter (Skin)
+    for (let i = 21; i <= 42; i++) {
       const option = document.createElement('option');
-      option.value = index + 21;
-      option.textContent = `${index + 21} - ${name}`;
+      option.value = i;
+      option.textContent = `ID ${i}`;
       motherSelect.appendChild(option);
-    });
+    }
 
     function updateOutput() {
-      const fatherIndex = fatherSelect.selectedIndex;
-      const motherIndex = motherSelect.selectedIndex;
-      faceIdOutput.textContent = fatherSelect.value;
-      skinIdOutput.textContent = motherSelect.value;
+      const faceId = fatherSelect.value;
+      const skinId = motherSelect.value;
+      faceIdOutput.textContent = faceId;
+      skinIdOutput.textContent = skinId;
 
-      const fatherName = fathers[fatherIndex].toLowerCase();
-      const motherName = mothers[motherIndex].toLowerCase();
-
-      fatherPreview.src = `img/${fatherName}.png`;
-      motherPreview.src = `img/${motherName}.png`;
+      fatherPreview.src = `img/${faceId}.png`;
+      motherPreview.src = `img/${skinId}.png`;
     }
 
     fatherSelect.addEventListener('change', updateOutput);
