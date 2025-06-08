@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ESX Skin Gesichtsauswahl</title>
   <style>
     body {
@@ -51,6 +51,7 @@
 <body>
   <div class="container">
     <h2>ESX Skin Gesichtsauswahl</h2>
+    
     <label for="fatherSelect">Vater (Face ID):</label>
     <select id="fatherSelect"></select>
 
@@ -64,14 +65,28 @@
 
     <div class="images">
       <label>Vater Vorschau:</label>
-      <img id="fatherPreview" src="img/0.png" alt="Vater Vorschau">
+      <img id="fatherPreview" src="img/0.png" alt="Vater Vorschau" />
 
       <label>Mutter Vorschau:</label>
-      <img id="motherPreview" src="img/21.png" alt="Mutter Vorschau">
+      <img id="motherPreview" src="img/21.png" alt="Mutter Vorschau" />
     </div>
   </div>
 
   <script>
+    const fathers = [
+      "Benjamin", "Daniel", "Joshua", "Noah", "Andrew",
+      "Juan", "Alex", "Isaac", "Evan", "Ethan",
+      "Vincent", "Angel", "Diego", "Adrian", "Gabriel",
+      "Michael", "Santiago", "Kevin", "Louis", "Samuel", "Anthony"
+    ];
+
+    const mothers = [
+      "Hannah", "Audrey", "Jasmine", "Giselle", "Amelia",
+      "Isabella", "Zoe", "Ava", "Camila", "Violet",
+      "Sophia", "Evelyn", "Nicole", "Ashley", "Grace",
+      "Brianna", "Natalie", "Olivia", "Elizabeth", "Charlotte", "Emma"
+    ];
+
     const fatherSelect = document.getElementById('fatherSelect');
     const motherSelect = document.getElementById('motherSelect');
     const faceIdOutput = document.getElementById('faceId');
@@ -79,36 +94,37 @@
     const fatherPreview = document.getElementById('fatherPreview');
     const motherPreview = document.getElementById('motherPreview');
 
-    // IDs 0–20 für Väter (Gesicht)
-    for (let i = 0; i <= 20; i++) {
+    // Väter 0–20
+    fathers.forEach((name, index) => {
       const option = document.createElement('option');
-      option.value = i;
-      option.textContent = `ID ${i}`;
+      option.value = index;
+      option.textContent = `${index} - ${name}`;
       fatherSelect.appendChild(option);
-    }
+    });
 
-    // IDs 21–42 für Mütter (Skin)
-    for (let i = 21; i <= 42; i++) {
+    // Mütter 21–42
+    mothers.forEach((name, index) => {
+      const id = index + 21;
       const option = document.createElement('option');
-      option.value = i;
-      option.textContent = `ID ${i}`;
+      option.value = id;
+      option.textContent = `${id} - ${name}`;
       motherSelect.appendChild(option);
-    }
+    });
 
     function updateOutput() {
-      const faceId = fatherSelect.value;
-      const skinId = motherSelect.value;
-      faceIdOutput.textContent = faceId;
-      skinIdOutput.textContent = skinId;
+      const fatherId = fatherSelect.value;
+      const motherId = motherSelect.value;
+      faceIdOutput.textContent = fatherId;
+      skinIdOutput.textContent = motherId;
 
-      fatherPreview.src = `img/${faceId}.png`;
-      motherPreview.src = `img/${skinId}.png`;
+      fatherPreview.src = `img/${fatherId}.png`;
+      motherPreview.src = `img/${motherId}.png`;
     }
 
     fatherSelect.addEventListener('change', updateOutput);
     motherSelect.addEventListener('change', updateOutput);
 
-    updateOutput();
+    updateOutput(); // Initiales Laden
   </script>
 </body>
 </html>
