@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESX Skin Gesichtsauswahl</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #2c2c2c;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background: #444;
+      color: #fff;
+    }
+    .output, .images {
+      margin-top: 20px;
+      padding: 10px;
+      background: #333;
+      border-radius: 5px;
+      text-align: center;
+    }
+    img {
+      margin-top: 10px;
+      max-width: 100px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ESX Skin Gesichtsauswahl</h2>
+    <label for="fatherSelect">Vater (Face ID):</label>
+    <select id="fatherSelect"></select>
+
+    <label for="motherSelect">Mutter (Skin ID):</label>
+    <select id="motherSelect"></select>
+
+    <div class="output">
+      <p><strong>Face ID:</strong> <span id="faceId">-</span></p>
+      <p><strong>Skin ID:</strong> <span id="skinId">-</span></p>
+    </div>
+
+    <div class="images">
+      <label>Vater Vorschau:</label>
+      <img id="fatherPreview" src="img/default_male.png" alt="Vater Vorschau">
+
+      <label>Mutter Vorschau:</label>
+      <img id="motherPreview" src="img/default_female.png" alt="Mutter Vorschau">
+    </div>
+  </div>
+
+  <script>
+    const fathers = [
+      "Benjamin", "Daniel", "Joshua", "Noah", "Andrew", "Juan", "Alex", "Isaac",
+      "Evan", "Ethan", "Vincent", "Angel", "Diego", "Adrian", "Gabriel", "Michael",
+      "Santiago", "Kevin", "Louis", "Samuel", "Anthony"
+    ];
+    const mothers = [
+      "Hannah", "Audrey", "Jasmine", "Giselle", "Amelia", "Isabella", "Zoe", "Ava",
+      "Camila", "Violet", "Sophia", "Evelyn", "Nicole", "Ashley", "Grace", "Brianna",
+      "Natalie", "Olivia", "Elizabeth", "Charlotte", "Emma"
+    ];
+
+    const fatherSelect = document.getElementById('fatherSelect');
+    const motherSelect = document.getElementById('motherSelect');
+    const faceIdOutput = document.getElementById('faceId');
+    const skinIdOutput = document.getElementById('skinId');
+    const fatherPreview = document.getElementById('fatherPreview');
+    const motherPreview = document.getElementById('motherPreview');
+
+    fathers.forEach((name, index) => {
+      const option = document.createElement('option');
+      option.value = index;
+      option.textContent = `${index} - ${name}`;
+      fatherSelect.appendChild(option);
+    });
+
+    mothers.forEach((name, index) => {
+      const option = document.createElement('option');
+      option.value = index + 21;
+      option.textContent = `${index + 21} - ${name}`;
+      motherSelect.appendChild(option);
+    });
+
+    function updateOutput() {
+      const fatherIndex = fatherSelect.selectedIndex;
+      const motherIndex = motherSelect.selectedIndex;
+      faceIdOutput.textContent = fatherSelect.value;
+      skinIdOutput.textContent = motherSelect.value;
+
+      const fatherName = fathers[fatherIndex].toLowerCase();
+      const motherName = mothers[motherIndex].toLowerCase();
+
+      fatherPreview.src = `img/${fatherName}.png`;
+      motherPreview.src = `img/${motherName}.png`;
+    }
+
+    fatherSelect.addEventListener('change', updateOutput);
+    motherSelect.addEventListener('change', updateOutput);
+
+    updateOutput();
+  </script>
+</body>
+</html>
