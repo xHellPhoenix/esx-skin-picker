@@ -9,3 +9,5 @@ Dies ist eine kleine Webanwendung zur Anzeige und Auswahl von Gesichts-IDs für 
 - Dynamische Anzeige der ID und des Namens
 - Bildervorschau basierend auf der gewählten ID
 - Einfach zu erweitern und anzupassen
+
+- Dieses Projekt ist urheberrechtlich geschützt. Weiterverwendung ohne Erlaubnis verboten.
